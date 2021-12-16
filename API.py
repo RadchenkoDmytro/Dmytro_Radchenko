@@ -13,7 +13,10 @@ headers = {
 
 response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+if response.ok:
+    print("File uploaded successfully!")
+else:
+    raise Exception(f"Failed to upload file. Got {response.status_code} error.")
 
 #GetMetadata
 url = "https://api.dropboxapi.com/2/files/get_metadata"
@@ -28,7 +31,10 @@ headers = {
 
 response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+if response.ok:
+    print("Metadata file successfully received!")
+else:
+    raise Exception(f"Failed to get metadata file. Got {response.status_code} error.")
 
 #Delete
 url = "https://api.dropboxapi.com/2/files/delete_v2"
@@ -43,4 +49,7 @@ headers = {
 
 response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+if response.ok:
+    print("File deleted successfully!")
+else:
+    raise Exception(f"Failed to delete file. Got {response.status_code} error.")
